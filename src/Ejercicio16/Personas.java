@@ -1,6 +1,6 @@
 package Ejercicio16;
 
-public abstract class Persona {
+public abstract class Personas {
     String nombre, apellido; int edad;
 
     public String getNombre() {
@@ -27,16 +27,16 @@ public abstract class Persona {
         this.edad = edad;
     }
 
-    public Persona(String nombre, String apellido, int edad) {
+    public Personas(String nombre, String apellido, int edad) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
     }
 
-    abstract public class Jugador extends Persona{
+    public abstract class Jugador extends Personas {
         boolean esTitular;
 
-        public boolean isEsTitular() {
+        public boolean getEsTitular() {
             return esTitular;
         }
 
@@ -52,19 +52,37 @@ public abstract class Persona {
     public class Arquero extends Jugador {
         int golesRecibidos;
 
+
         public Arquero(String nombre, String apellido, int edad, boolean esTitular, int golesRecibidos) {
             super(nombre, apellido, edad, esTitular);
             this.golesRecibidos = golesRecibidos;
         }
 
-        public String toString() {
-            return "Nombre -" + nombre + ",Apellido -" + apellido + " Edad = " + edad + ", Goles recibidos " + golesRecibidos;
 
+        public int getGolesRecibidos() {
+            return golesRecibidos;
+
+        }
+
+        public void setGolesRecibidos(int golesRecibidos) {
+            this.golesRecibidos = golesRecibidos;
+        }
+
+        public String toString() {
+            return "Nombre: " + getNombre() + ",Apellido: " + getApellido() + " Edad = " + getEdad() + ", Goles recibidos " + getGolesRecibidos() + ", Titular:" +getEsTitular();
         }
     }
 
     public class Delantero extends Jugador {
         int golesAnotados;
+
+        public int getGolesAnotados() {
+            return golesAnotados;
+        }
+
+        public void setGolesAnotados(int golesAnotados) {
+            this.golesAnotados = golesAnotados;
+        }
 
         public Delantero(String nombre, String apellido, int edad, boolean esTitular, int golesAnotados) {
             super(nombre, apellido, edad, esTitular);
@@ -96,13 +114,45 @@ public abstract class Persona {
             return "Nombre - " + nombre + " ,Apellido -" + apellido + " ,Edad = " + edad + " ,Ataques anotados: " + ataquesAnotados + " ,Goles anotados: "+golesAnotados;
         }
     }
-    abstract public class Tecnico extends Persona{
+    public abstract class Tecnico extends Personas {
         int anioExp; boolean nacional, extranjero;
-        Tecnico(String nombre, String apellido, int edad, int anioExp, boolean nacional, boolean extranjero){
+
+        public Tecnico(String nombre, String apellido, int edad, int anioExp, boolean nacional, boolean extranjero){
             super(nombre, apellido, edad);
             this.anioExp = anioExp;
             this.nacional = nacional;
             this.extranjero = extranjero;
+        }
+
+        public int getAnioExp() {
+            return anioExp;
+        }
+
+        public void setAnioExp(int anioExp) {
+            this.anioExp = anioExp;
+        }
+
+        public boolean getNacional() {
+            return nacional;
+        }
+
+        public void setNacional(boolean nacional) {
+            this.nacional = nacional;
+        }
+
+        public boolean getExtranjero() {
+            return extranjero;
+        }
+
+        public void setExtranjero(boolean extranjero) {
+            this.extranjero = extranjero;
+        }
+
+        public String toStringNac(){
+            return "Nombre - " + nombre + " ,Apellido -" + apellido + " ,Edad = " + edad + " ,Anio experiencia " + anioExp + " Nacional "+nacional;
+        }
+        public String toStringExt(){
+            return "Nombre - " + nombre + " ,Apellido -" + apellido + " ,Edad = " + edad + " ,Anio experiencia " + anioExp + " Extranjero: "+extranjero;
         }
     }
 

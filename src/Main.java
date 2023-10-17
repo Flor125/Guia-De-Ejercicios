@@ -1,17 +1,19 @@
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
-import javax.swing.JOptionPane;
-import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+
 import Clases.*;
-import Ejercicio15.*;
+import Ejercicio15.Contacto;
+import Ejercicio15.Empresa;
 import Ejercicio15.Persona;
+import Ejercicio16.EquipoFutbol;
+import Ejercicio16.Personas;
+import Ejercicio16.Personas.Arquero;
 import Ejercicio17.Vendedor;
 import Ejercicio18.TeamProgrammer;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -142,7 +144,7 @@ public class Main {
             List<Vehiculo> vehiculos = new ArrayList<>();
             Scanner reader = new Scanner(System.in);
 
-            while(true) {
+            while (true) {
                 System.out.println("Bienvenido al menú de RENT - ART");
                 int opt;
                 System.out.println("1. Ingresar Cliente y vehículo\n 2. Vehiculos alquilados por el cliente\n 3. Eliminar vehículos ingresados\n 4. Salir");
@@ -315,25 +317,61 @@ public class Main {
         case 15:
             Ejercicio15();
         case 16:
-            String nombre, apell, nombEquipo, pais; int edad, golesRecibidos, golesAnot, numAsistencias, ataquesAnotados, golesAnotados;
+            String nombre = "", apell = "", nombEquipo = null, pais, equipo2 = null;
+            int edad = 0, golesRecibidos, golesAnot, numAsistencias, ataquesAnotados, golesAnotados;
             boolean esTitular;
-            List<Ejercicio16.Persona.Mediocampista> mediocampistas = new ArrayList<>();
-            List<Ejercicio16.Persona.Delantero> delanteros = new ArrayList<>();
-            List<Ejercicio16.Persona.Defensor> defensores = new ArrayList<>();
+            EquipoFutbol equipoFutbol = null;
+            List<Personas.Mediocampista> mediocampistas = new ArrayList<>();
+            List<Personas.Delantero> delanteros = new ArrayList<>();
+            List<Personas.Defensor> defensores = new ArrayList<>();
 
             Scanner lectu = new Scanner(System.in);
 
-            while(true){
+            while (true) {
+                System.out.println("Nombre del equipo");
+                nombEquipo = lectu.nextLine();
+                System.out.println("Pais");
+                pais = lectu.nextLine();
                 System.out.println("Conformación de equipo de futbol");
                 int optio;
                 System.out.println(" 1. Agregar personas\n 2. Mostrar equipo");
                 optio = lectu.nextInt();
                 lectu.nextLine();
+                Personas personas = new Personas(nombre, apell, edad) {
+                    @Override
+                    public String getNombre() {
+                        return super.getNombre();
+                    }
 
-                switch (optio){
-                    case 1:
+                    @Override
+                    public void setNombre(String nombre) {
+                        super.setNombre(nombre);
+                    }
+
+                    @Override
+                    public String getApellido() {
+                        return super.getApellido();
+                    }
+
+                    @Override
+                    public void setApellido(String apellido) {
+                        super.setApellido(apellido);
+                    }
+
+                    @Override
+                    public int getEdad() {
+                        return super.getEdad();
+                    }
+
+                    @Override
+                    public void setEdad(int edad) {
+                        super.setEdad(edad);
+                    }
+
+
+                };
                         System.out.println("PERSONAS");
-                        try {
+                            System.out.println("ARQUERO");
                             System.out.println("Ingrese el nombre:");
                             nombre = lectu.nextLine();
                             System.out.println("Ingrese el apellido:");
@@ -341,37 +379,206 @@ public class Main {
                             System.out.println("Ingrese la edad:");
                             edad = lectu.nextInt();
                             lectu.nextLine();
-                            System.out.println(" 1. Jugador\n 2. Tecnico");
-                            int cho = lectu.nextInt();
+                            System.out.println("Goles recibidos:");
+                            golesRecibidos = lectu.nextInt();
                             lectu.nextLine();
-                            if(cho == 1){
-                                try{
-                                    System.out.println("ARQUERO");
-                                    System.out.println("1. Titular | 2. No titular)");
-                                    esTitular = lectu.nextBoolean();
+                            System.out.println("1. Titular | 2. No titular)");
+                            esTitular = (lectu.nextInt() == 1);
+                            lectu.nextLine();
+                            Arquero arquero = personas.new Arquero(nombre, apell, edad, esTitular, golesRecibidos);
+                            arquero.setNombre(nombre);
+                            arquero.setApellido(apell);
+                            arquero.setEdad(edad);
+                            arquero.setEsTitular(esTitular);
+                            arquero.setGolesRecibidos(golesRecibidos);
+                            String arqueroInfo = arquero.toString();
+                            System.out.println(arqueroInfo);
 
-                                    System.out.println("DEFENSORES");
+                            if (defensores.size() < 4) {
+                                System.out.println("DEFENSORES");
+                                for (int i = 0; i < 4 - defensores.size(); i++) {
+                                    System.out.println("ID"+i+":");
+                                    System.out.println("Ingrese el nombre:");
+                                    nombre = lectu.nextLine();
+                                    System.out.println("Ingrese el apellido:");
+                                    apell = lectu.nextLine();
+                                    System.out.println("Ingrese la edad:");
+                                    edad = lectu.nextInt();
+                                    lectu.nextLine();
                                     System.out.println("Ataques anotados:");
                                     ataquesAnotados = lectu.nextInt();
                                     System.out.println("Goles anotados:");
                                     golesAnotados = lectu.nextInt();
+                                    lectu.nextLine();
+                                    System.out.println("1. Titular | 2. No titular");
+                                    esTitular = (lectu.nextInt() == 1);
+                                    lectu.nextLine();
 
-                                    //Persona persona2 = new Ejercicio16.Persona.Defensor(nombre, apell, edad, esTitular, ataquesAnotados, golesAnotados);
-
-
-
-
-                                }catch(java.util.InputMismatchException e){
-                                    System.out.println("Entrada incorrecta");
+                                    Personas.Defensor defensor = personas.new Defensor(nombre, apell, edad, esTitular, ataquesAnotados, golesAnotados);
+                                    defensores.add(defensor);
                                 }
+                            } else {
+                                System.out.println("El equipo ya tiene 4 defensores. No se pueden agregar más.");
                             }
 
+                            if (mediocampistas.size() < 4) {
+                                System.out.println("MEDIOCAMPISTA");
+                                for(int i = 0; i < 4 - mediocampistas.size(); i++) {
+                                    System.out.println("ID"+i+":");
+                                    System.out.println("Ingrese el nombre:");
+                                    nombre = lectu.nextLine();
+                                    System.out.println("Ingrese el apellido:");
+                                    apell = lectu.nextLine();
+                                    System.out.println("Ingrese la edad:");
+                                    edad = lectu.nextInt();
+                                    lectu.nextLine();
+                                    System.out.println("Numeros de asistencias:");
+                                    numAsistencias = lectu.nextInt();
+                                    lectu.nextLine();
+                                    Personas.Mediocampista mediocampista = personas.new Mediocampista(nombre, apell, edad, esTitular, numAsistencias);
+                                    mediocampistas.add(mediocampista);
+                                }
+                            } else {
+                                System.out.println("El equipo ya tiene 4 mediocampistas. No se puede agregar más");
+                            }
+                            if (delanteros.size() < 2) {
+                                System.out.println("DELANTEROS");
+                                for(int i = 0; i < 2 - delanteros.size(); i++) {
+                                    System.out.println("ID"+i+":");
+                                    System.out.println("Ingrese el nombre:");
+                                    nombre = lectu.nextLine();
+                                    System.out.println("Ingrese el apellido:");
+                                    apell = lectu.nextLine();
+                                    System.out.println("Ingrese la edad:");
+                                    edad = lectu.nextInt();
+                                    lectu.nextLine();
+                                    System.out.println("Ataques anotados:");
+                                    ataquesAnotados = lectu.nextInt();
+                                    lectu.nextLine();
+                                    System.out.println("Goles anotados:");
+                                    golesAnotados = lectu.nextInt();
+                                    lectu.nextLine();
 
-                        }catch (java.util.InputMismatchException e){
-                            System.out.println("Entrada incorrecta");
-                        }
-                }
+                                    Personas.Delantero delantero = personas.new Delantero(nombre, apell, edad, esTitular, golesAnotados);
+                                    delanteros.add(delantero);
+                                }
+                            } else {
+                                System.out.println("El equipo ya tiene 2 defensores. No se puede agregar más.");
+                            }
+
+                            boolean nacional, extranjero;
+                            System.out.println("TECNICO");
+                            System.out.println("Ingrese el nombre:");
+                            nombre = lectu.nextLine();
+                            System.out.println("Ingrese el apellido:");
+                            apell = lectu.nextLine();
+                            System.out.println("Ingrese la edad:");
+                            edad = lectu.nextInt();
+                            lectu.nextLine();
+                            System.out.println("Anio de experiencia");
+                            int anioExp = lectu.nextInt();
+                            lectu.nextLine();
+
+                            System.out.println("1. Nacional | 2. Extranjero");
+                            int op = lectu.nextInt();
+                            lectu.nextLine();
+
+                            if (op == 1) {
+                                nacional = true;
+                                extranjero = false;
+                            } else if (op == 2) {
+                                extranjero = true;
+                                nacional = false;
+                            } else {
+                                System.out.println("Opción no válida. Debes seleccionar 1 (Nacional) o 2 (Extranjero).");
+                                return;
+                            }
+                            Personas.Tecnico tecnico = personas.new Tecnico(nombre, apell, edad, anioExp, nacional, extranjero) {
+                                @Override
+                                public String getNombre() {
+                                    return super.getNombre();
+                                }
+
+                                @Override
+                                public void setNombre(String nombre) {
+                                    super.setNombre(nombre);
+                                }
+
+                                @Override
+                                public String getApellido() {
+                                    return super.getApellido();
+                                }
+
+                                @Override
+                                public void setApellido(String apellido) {
+                                    super.setApellido(apellido);
+                                }
+
+                                @Override
+                                public int getEdad() {
+                                    return super.getEdad();
+                                }
+
+                                @Override
+                                public void setEdad(int edad) {
+                                    super.setEdad(edad);
+                                }
+                            };
+
+                            tecnico.setNombre(nombre);
+                            tecnico.setApellido(apell);
+                            tecnico.setEdad(edad);
+                            tecnico.setAnioExp(anioExp);
+
+                            if (nacional) {
+                                tecnico.setNacional(nacional);
+                                String tecnicoInfo = tecnico.toString();
+                                System.out.println(tecnicoInfo);
+                            } else if (extranjero) {
+                                tecnico.setExtranjero(extranjero);
+                                String tecnicoInfo = tecnico.toString();
+                                System.out.println(tecnicoInfo);
+                            }
+                        equipoFutbol = new EquipoFutbol(nombEquipo, pais, equipoFutbol.getTecnico(), equipoFutbol.getArquero(), equipoFutbol.getMediocampistas(), equipoFutbol.getDelanteros(), equipoFutbol.getDefensores()) {
+                            @Override
+                            public String getNombre() {
+                                return super.getNombre();
+                            }
+
+                            @Override
+                            public String getPais() {
+                                return super.getPais();
+                            }
+
+                            @Override
+                            public Personas.Tecnico getTecnico() {
+                                return super.getTecnico();
+                            }
+
+                            @Override
+                            public Personas.Arquero getArquero() {
+                                return super.getArquero();
+                            }
+
+                            @Override
+                            public List<Personas.Mediocampista> getMediocampistas() {
+                                return super.getMediocampistas();
+                            }
+
+                            @Override
+                            public List<Personas.Delantero> getDelanteros() {
+                                return super.getDelanteros();
+                            }
+
+                            @Override
+                            public List<Personas.Defensor> getDefensores() {
+                                return super.getDefensores();
+                            }
+                        };
+                        EquipoFutbol.mostrarEquipo(equipoFutbol);
+                        break;
             }
+
         case 17:
             String nom, apelli; int age;
             Scanner ej17 = new Scanner(System.in);
@@ -416,7 +623,6 @@ public class Main {
                 equipo.agregarProgramador(nombreProgramador);
             }
             rea.close();
-            break;
     }
     }
     static boolean esPrimo (int par){
